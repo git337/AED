@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class telSchedule{
+    public:
+        void printOut();
+        telSchedule(string nome, string telefone){
+            this->nome = nome;
+            this->telefone = telefone;
+        };
+        
+    private:
+        string nome;
+        string telefone;
+};
+void telSchedule::printOut(){
+    cout<< "Nome : " + nome <<"\n";
+    cout<< "Telefone : " + telefone;
+};
+
+int main() {
+    telSchedule pessoa = telSchedule("Mario", "999999999");
+    pessoa.printOut();
+    return 0;
+};
