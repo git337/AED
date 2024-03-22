@@ -1,0 +1,88 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Pessoa {
+private:
+    string nome;
+    string telefone;
+    string tipoSanguineo;
+    int idade;
+
+public:
+    Pessoa(string nome, string telefone, string tipoSanguineo, int idade) {
+        this->nome = nome;
+        this->telefone = telefone;
+        this->tipoSanguineo = tipoSanguineo;
+        this->idade = idade;
+    }
+
+    string getNome() const {
+        return nome;
+    }
+
+    void setNome(string nome) {
+        this->nome = nome;
+    }
+
+    string getTelefone() const {
+        return telefone;
+    }
+
+    void setTelefone(string telefone) {
+        this->telefone = telefone;
+    }
+
+    string getTipoSanguineo() const {
+        return tipoSanguineo;
+    }
+
+    void setTipoSanguineo(string tipoSanguineo) {
+        this->tipoSanguineo = tipoSanguineo;
+    }
+
+    int getIdade() const {
+        return idade;
+    }
+
+    void setIdade(int idade) {
+        this->idade = idade;
+    }
+};
+
+class Hospital {
+private:
+    vector<Pessoa> pessoas;
+
+public:
+    void cadastrarPessoa(const Pessoa& pessoa) {
+        pessoas.push_back(pessoa);
+    }
+
+    void listarDoadoresUniversais() const {
+        cout << "Doadores Universais:" << endl;
+        for (const auto& pessoa : pessoas) {
+            if (pessoa.getTipoSanguineo() == "O-" || pessoa.getTipoSanguineo() == "O+") {
+                cout << "Nome: " << pessoa.getNome() << endl;
+                cout << "Telefone: " << pessoa.getTelefone() << endl;
+                cout << "Tipo Sanguineo: " << pessoa.getTipoSanguineo() << endl;
+                cout << "Idade: " << pessoa.getIdade() << endl << endl;
+            }
+        }
+    }
+};
+
+int main() {
+    Hospital hospital;
+
+    hospital.cadastrarPessoa(Pessoa("Joao Silva", "123456789", "O-", 30));
+    hospital.cadastrarPessoa(Pessoa("Maria Souza", "987654321", "A+", 25));
+    hospital.cadastrarPessoa(Pessoa("Pedro Santos", "111222333", "AB-", 40));
+    hospital.cadastrarPessoa(Pessoa("Ana Oliveira", "444555666", "O+", 35));
+
+    hospital.listarDoadoresUniversais();
+
+    return 0;
+}
