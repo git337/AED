@@ -1,0 +1,75 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+class Complexo {
+private:
+    double real;
+    double imaginario;
+
+public:
+    Complexo(double real, double imaginario) {
+        this->real = real;
+        this->imaginario = imaginario;
+    }
+
+    double getReal() const {
+        return real;
+    }
+
+    double getImaginario() const {
+        return imaginario;
+    }
+
+    Complexo operator+(const Complexo& outro) const {
+        return Complexo(real + outro.real, imaginario + outro.imaginario);
+    }
+
+    Complexo operator-(const Complexo& outro) const {
+        return Complexo(real - outro.real, imaginario - outro.imaginario);
+    }
+
+    Complexo operator*(const Complexo& outro) const {
+        return Complexo(real * outro.real - imaginario * outro.imaginario,
+                        real * outro.imaginario + imaginario * outro.real);
+    }
+
+    Complexo operator/(const Complexo& outro) const {
+        double divisor = outro.real * outro.real + outro.imaginario * outro.imaginario;
+        double parteReal = (real * outro.real + imaginario * outro.imaginario) / divisor;
+        double parteImaginaria = (imaginario * outro.real - real * outro.imaginario) / divisor;
+        return Complexo(parteReal, parteImaginaria);
+    }
+
+    Complexo raizQuadrada() const {
+        double parteReal = sqrt((real + sqrt(real * real + imaginario * imaginario)) / 2);
+        double parteImaginaria = sqrt((-real + sqrt(real * real + imaginario * imaginario)) / 2);
+        return Complexo(parteReal, parteImaginaria);
+    }
+
+    Complexo quadrado() const {
+        return Complexo(real * real - imaginario * imaginario, 2 * real * imaginario);
+    }
+};
+
+int main() {
+    Complexo num1(2, 3);
+    Complexo num2(1, 2);
+
+    Complexo resultadoSoma = num1 + num2;
+    Complexo resultadoSubtracao = num1 - num2;
+    Complexo resultadoMultiplicacao = num1 * num2;
+    Complexo resultadoDivisao = num1 / num2;
+    Complexo resultadoRaizQuadrada = num1.raizQuadrada();
+    Complexo resultadoQuadrado = num1.quadrado();
+
+    cout << "Soma: " << resultadoSoma.getReal() << " + " << resultadoSoma.getImaginario() << "i" << endl;
+    cout << "Subtracao: " << resultadoSubtracao.getReal() << " + " << resultadoSubtracao.getImaginario() << "i" << endl;
+    cout << "Multiplicacao: " << resultadoMultiplicacao.getReal() << " + " << resultadoMultiplicacao.getImaginario() << "i" << endl;
+    cout << "Divisao: " << resultadoDivisao.getReal() << " + " << resultadoDivisao.getImaginario() << "i" << endl;
+    cout << "Raiz Quadrada: " << resultadoRaizQuadrada.getReal() << " + " << resultadoRaizQuadrada.getImaginario() << "i" << endl;
+    cout << "Quadrado: " << resultadoQuadrado.getReal() << " + " << resultadoQuadrado.getImaginario() << "i" << endl;
+
+    return 0;
+}
