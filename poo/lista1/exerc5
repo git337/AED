@@ -1,0 +1,62 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+class Calculadora {
+private:
+    const double PI = 3.14159265359;
+    double raioCirculo;
+    double ladoCubo;
+
+    double calcularComprimentoCircunferencia(double raio) {
+        return 2 * PI * raio;
+    }
+
+    double calcularAreaCircunferencia(double raio) {
+        return PI * pow(raio, 2);
+    }
+
+    double calcularAreaLateralCubo(double lado) {
+        return 4 * pow(lado, 2);
+    }
+
+    double calcularAreaTotalCubo(double lado) {
+        return 6 * pow(lado, 2);
+    }
+
+    double calcularVolumeCubo(double lado) {
+        return pow(lado, 3);
+    }
+
+public:
+    void definirDimensoesCirculo(double raio) {
+        raioCirculo = raio;
+    }
+
+    void definirDimensoesCubo(double lado) {
+        ladoCubo = lado;
+    }
+
+    void imprimirCalculos() {
+        cout << "Circulo:" << endl;
+        cout << "Comprimento da circunferencia: " << calcularComprimentoCircunferencia(raioCirculo) << endl;
+        cout << "Area da circunferencia: " << calcularAreaCircunferencia(raioCirculo) << endl;
+
+        cout << "\nCubo:" << endl;
+        cout << "Area lateral do cubo: " << calcularAreaLateralCubo(ladoCubo) << endl;
+        cout << "Area total do cubo: " << calcularAreaTotalCubo(ladoCubo) << endl;
+        cout << "Volume do cubo: " << calcularVolumeCubo(ladoCubo) << endl;
+    }
+};
+
+int main() {
+    Calculadora calculadora;
+
+    calculadora.definirDimensoesCirculo(5);
+    calculadora.definirDimensoesCubo(4);
+
+    calculadora.imprimirCalculos();
+
+    return 0;
+}
