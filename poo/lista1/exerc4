@@ -1,0 +1,98 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Dono {
+private:
+    string nome;
+    string telefone;
+
+public:
+    Dono(string nome, string telefone) {
+        this->nome = nome;
+        this->telefone = telefone;
+    }
+
+    string getNome() const {
+        return nome;
+    }
+
+    string getTelefone() const {
+        return telefone;
+    }
+};
+
+class Carro {
+private:
+    string marca;
+    string placa;
+    string cor;
+    Dono dono;
+
+public:
+    Carro(string marca, string placa, string cor, const Dono& dono) : dono(dono) {
+        this->marca = marca;
+        this->placa = placa;
+        this->cor = cor;
+    }
+
+    string getMarca() const {
+        return marca;
+    }
+
+    string getPlaca() const {
+        return placa;
+    }
+
+    string getCor() const {
+        return cor;
+    }
+
+    Dono getDono() const {
+        return dono;
+    }
+};
+
+class CadastroCarros {
+private:
+    vector<Carro> carros;
+
+public:
+    void cadastrarCarro(const Carro& carro) {
+        carros.push_back(carro);
+    }
+
+    void listarCarros() const {
+        if (carros.empty()) {
+            cout << "Nenhum carro cadastrado." << endl;
+            return;
+        }
+
+        cout << "Lista de Carros Cadastrados:" << endl;
+        for (const auto& carro : carros) {
+            cout << "Marca: " << carro.getMarca() << endl;
+            cout << "Placa: " << carro.getPlaca() << endl;
+            cout << "Cor: " << carro.getCor() << endl;
+            cout << "Dono: " << carro.getDono().getNome() << endl;
+            cout << "Telefone: " << carro.getDono().getTelefone() << endl << endl;
+        }
+    }
+};
+
+int main() {
+    CadastroCarros cadastro;
+
+    Dono dono1("Joao da Silva", "123456789");
+    Carro carro1("Chevrolet", "ABC1234", "Prata", dono1);
+    cadastro.cadastrarCarro(carro1);
+
+    Dono dono2("Maria Souza", "987654321");
+    Carro carro2("Ford", "XYZ5678", "Preto", dono2);
+    cadastro.cadastrarCarro(carro2);
+
+    cadastro.listarCarros();
+
+    return 0;
+}
