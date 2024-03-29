@@ -1,0 +1,54 @@
+1-
+  a)Um dos paradigmas da programação que se baseia em objetos
+    public:
+      Carro(int ano, string marca){
+      int ano;
+      string marca;
+      };
+  b)Uma base para se criar objetos, onde se define atributos e métodos para objetos
+    class Carro {
+      private:
+        string cor;
+        int ano;
+        }
+  c)Um objeto criado a partir de uma classe
+      public:
+      Carro(int ano, string marca){
+      int ano;
+      string marca;
+      };
+  d)Uma instância de uma classe
+
+2-Em uma class todos membros são privados enquanto na struct são publicos
+3-Atributos são variáveis de um objeto ou instância que descrevem o estado do objeto, métodos são operações que um objeto realiza
+  -----------------------------
+            Carro
+  -----------------------------
+    - Marca : String
+    -  Ano : Inteiro
+    - Cor : String
+  -----------------------------
+    + acelerar() : void
+    + frear() : void
+  ----------------------------
+
+4-C
+5-Herança ocorre quando uma filha herda atributos da classe mãe, 
+já o polimorfismo pode ocorrer quando uma classe filha  escreve sobre uma método da classe mãe
+6-É necessário utilizar-lo para tornar atributos de uma classe não visível (no caso de private), protegendo os dados, enquanto
+o public e o protegido não são capazes de realizar o mesmo.
+7-São utilizados para acessar os atributos de uma classe e poder modifica-los
+------------------------
+        Carro
+-----------------------
+  -  marca: String
+  -  Ano : Inteiro
+  - Cor : String
+ -----------------------------
+    + getMarca() : String
+    + setMarca(novaMarca: String) : void
+----------------------------
+
+8-Promove a organização hierárquica de classes, fornecendo para uma classe derivada os atributos e métodos de uma classe base
+
+  
