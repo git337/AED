@@ -1,0 +1,67 @@
+#include <iostream>
+#include <string>
+#include <unordered_map>
+using namespace std;
+
+class Dono {
+private:
+    string nome;
+    string telefone;
+
+public:
+    Dono(string n, string tel) : nome(n), telefone(tel) {}
+
+    string getNome() const { return nome; }
+    string getTelefone() const { return telefone; }
+};
+
+class Carro {
+private:
+    string marca;
+    string placa;
+    string cor;
+    Dono* dono;
+
+public:
+    Carro(string marc, string plac, string c, Dono* d) : marca(marc), placa(plac), cor(c), dono(d) {}
+
+    string getMarca() const { return marca; }
+    string getPlaca() const { return placa; }
+    string getCor() const { return cor; }
+    Dono* getDono() const { return dono; }
+};
+
+int main() {
+    unordered_map<string, Dono*> donos;
+
+    Carro carros[100];
+    int numCarros = 0;
+
+    Dono* dono1 = new Dono("Gustavo", "123456789");
+    Dono* dono2 = new Dono("José", "987654321");
+    donos["123456789"] = dono1;
+    donos["987654321"] = dono2;
+
+    carros[numCarros++] = Carro("Ford", "ABC1234", "Preto", dono1);
+    carros[numCarros++] = Carro("Chevrolet", "DEF5678", "Branco", dono2);
+
+    cout << "Carros cadastrados no estacionamento:" << endl;
+    for (int i = 0; i < numCarros; ++i) {
+        cout << "Carro " << (i + 1) << ":" << endl;
+        cout << "Marca: " << carros[i].getMarca() << endl;
+        cout << "Placa: " << carros[i].getPlaca() << endl;
+        cout << "Cor: " << carros[i].getCor() << endl;
+        Dono* dono = carros[i].getDono();
+        if (dono != nullptr) {
+            cout << "Proprietário: " << dono->getNome() << endl;
+            cout << "Telefone: " << dono->getTelefone() << endl;
+        } else {
+            cout << "Proprietário não cadastrado." << endl;
+        }
+        cout << endl;
+    }
+
+
+
+    return 0;
+}
