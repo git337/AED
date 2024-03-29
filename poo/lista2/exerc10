@@ -1,0 +1,92 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Aluno {
+  private:
+    string nome;
+    string matricula;
+    int idade;
+    int semestre;
+    string curso;
+    float nota;
+    int faltas;
+    static int totalAlunos;
+  public:
+    Aluno(string n, string mat, int id, int sem, string curs) : nome(n), matricula(mat), idade(id), semestre(sem), curso(curs), nota(0), faltas(0) {
+        totalAlunos++; 
+    }
+    ~Aluno() {
+        totalAlunos--;
+    }
+    string getNome() const { return nome; }
+    void setNome(string n) { nome = n; }
+
+    string getMatricula() const { return matricula; }
+    void setMatricula(string mat) { matricula = mat; }
+
+    int getIdade() const { return idade; }
+    void setIdade(int id) { idade = id; }
+
+    int getSemestre() const { return semestre; }
+    void setSemestre(int sem) { semestre = sem; }
+
+    string getCurso() const { return curso; }
+    void setCurso(string curs) { curso = curs; }
+
+    float getNota() const { return nota; }
+    void setNota(float n) { nota = n; }
+
+    int getFaltas() const { return faltas; }
+    void setFaltas(int f) { faltas = f; }
+    static int getTotalALunos() { return totalAlunos; }
+    void atribuirNota(float n) {
+      nota = n;
+      }
+    void atribuirFaltas(int f){
+      faltas=f;
+      }
+    static float calcularMediaIdades(const Aluno alunos[], int numAlunos) {
+        int somaIdades = 0;
+        for (int i = 0; i < numAlunos; ++i) {
+            somaIdades += alunos[i].getIdade();
+        }
+        return static_cast<float>(somaIdades) / numAlunos;
+    }
+    static float calcularMediaNotas(const Aluno alunos[], int numAlunos) {
+        float somaNotas = 0;
+        for (int i = 0; i < numAlunos; ++i) {
+            somaNotas += alunos[i].getNota();
+        }
+        return somaNotas / numAlunos;
+    }
+     static float calcularMediaFaltas(const Aluno alunos[], int numAlunos) {
+        float somaFaltas = 0;
+        for (int i = 0; i < numAlunos; ++i) {
+            somaFaltas += alunos[i].getFaltas();
+        }
+        return somaFaltas / numAlunos;
+    }
+     static void imprimirResultados(const Aluno alunos[], int numAlunos) {
+        cout << "Quantidade de Alunos: " << numAlunos << "\n";
+        cout << "Média das notas: " << calcularMediaNotas(alunos, numAlunos) << "\n";
+        cout << "Média das faltas: " << calcularMediaFaltas(alunos, numAlunos) << "\n";
+        cout << "Média das idades: " << calcularMediaIdades(alunos, numAlunos) << "\n";
+        }
+};
+
+int Aluno::totalAlunos = 0;
+
+int main(){
+  const int maximoAlunos = 120;
+  Aluno alunos[maximoAlunos];
+  int numAlunos = 0;
+  alunos[numAlunos++] = Aluno("Gustavo", "202088464", 23, 7, "Engenharia de Rede");
+  alunos[numAlunos++] = Aluno("José", "198392873", 19, 1, "Ciências da Natureza");
+  alunos[0].atribuirNota(8.5);
+
+  return 0;
+  };
+  
+    
+    
