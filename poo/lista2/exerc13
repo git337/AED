@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class Matematica {
+public:
+    static float calcularDiametro(float raio) {
+        return 2 * raio;
+    }
+
+    static float calcularAreaCircunferencia(float raio) {
+        return M_PI * raio * raio;
+    }
+
+    static float calcularAreaLateralCubo(float lado) {
+        return 4 * lado * lado;
+    }
+
+    static float calcularAreaTotalCubo(float lado) {
+        return 6 * lado * lado;
+    }
+
+    static float calcularVolumeCubo(float lado) {
+        return lado * lado * lado;
+    }
+};
+
+int main() {
+    float raioCirculo = 5.0;
+    float ladoCubo = 3.0;
+
+    float diametro = Matematica::calcularDiametro(raioCirculo);
+    cout << "Diâmetro da circunferência: " << diametro << endl;
+
+    float areaCirculo = Matematica::calcularAreaCircunferencia(raioCirculo);
+    cout << "Área da circunferência: " << areaCirculo << endl;
+
+    float areaLateralCubo = Matematica::calcularAreaLateralCubo(ladoCubo);
+    cout << "Área lateral do cubo: " << areaLateralCubo << endl;
+
+    float areaTotalCubo = Matematica::calcularAreaTotalCubo(ladoCubo);
+    cout << "Área total do cubo: " << areaTotalCubo << endl;
+
+    float volumeCubo = Matematica::calcularVolumeCubo(ladoCubo);
+    cout << "Volume do cubo: " << volumeCubo << endl;
+
+    return 0;
+}
