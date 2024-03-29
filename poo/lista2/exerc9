@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Aluno {
+  private:
+    string nome;
+    string matricula;
+    int idade;
+    int semestre;
+    string curso;
+  public:
+    Aluno(string n, string mat, int id, int sem, string curs) : nome(n), matricula(mat), idade(id), semestre(sem), curso(curs) {}
+    void mostrarDados() {
+      cout<<"Nome: " <<nome<<"\n";
+      cout<<"Matrícula: " <<matricula<<"\n";
+      cout<<"Idade: " <<idade<<"\n";
+      cout<<"Semestre: " <<semestre<<"\n";
+      cout<<"Curso: " <<curso<<"\n";
+      }
+};
+int main(){
+  Aluno alunos[];
+  int numAlunos = 0;
+  alunos[numAlunos++] = aluno1("Gustavo", "202088574", 23, 7, "Engenharia de Redes");
+  alunos[numAlunos++] = aluno2("José", "19887247", 19, 1, "Ciências da Natureza");
+
+  cout<<"Alunos cadastrados:"<<"\n";
+  for(int i = 0; i<numAlunos;++i){
+    alunos[i].mostrarDados();
+    }
+    
+return 0;
+
+};
