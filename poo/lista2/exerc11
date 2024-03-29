@@ -1,0 +1,77 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+const int MAX_VEICULOS = 100; 
+
+class Veiculo {
+private:
+    float peso;
+    int ano;
+    string cor;
+    string marca;
+    static int numVeiculos; 
+    static Veiculo veiculos[MAX_VEICULOS]; 
+
+public:
+    
+    Veiculo(float p, int a, string c, string m) : peso(p), ano(a), cor(c), marca(m) {}
+
+    float getPeso() const { return peso; }
+    void setPeso(float p) { peso = p; }
+
+    int getAno() const { return ano; }
+    void setAno(int a) { ano = a; }
+
+    string getCor() const { return cor; }
+    void setCor(string c) { cor = c; }
+
+    string getMarca() const { return marca; }
+    void setMarca(string m) { marca = m; }
+
+    static void adicionarVeiculo(float p, int a, string c, string m) {
+        if (numVeiculos < MAX_VEICULOS) {
+            Veiculo novoVeiculo(p, a, c, m);
+            veiculos[numVeiculos++] = novoVeiculo;
+        } else {
+            cout << "Limite máximo de veículos atingido." << "\n";
+        }
+    }
+
+    static void imprimirVeiculos() {
+        cout << "Veículos cadastrados:" << "\n";
+        for (int i = 0; i < numVeiculos; ++i) {
+            cout << "Marca: " << veiculos[i].getMarca() << ", Ano: " << veiculos[i].getAno() << ", Cor: " << veiculos[i].getCor() << ", Peso: " << veiculos[i].getPeso() << "\n";
+        }
+    }
+
+    static void imprimirArquivo(const string& nomeArquivo) {
+        ofstream arquivo(nomeArquivo);
+        if (arquivo.is_open()) {
+            arquivo << "Veículos cadastrados:" << endl;
+            for (int i = 0; i < numVeiculos; ++i) {
+                arquivo << "Marca: " << veiculos[i].getMarca() << ", Ano: " << veiculos[i].getAno() << ", Cor: " << veiculos[i].getCor() << ", Peso: " << veiculos[i].getPeso() << "\n";
+            }
+            arquivo.close();
+            cout << "Arquivo " << nomeArquivo << " gerado com sucesso." << "\n";
+        } else {
+            cout << "Erro ao abrir o arquivo " << nomeArquivo << "." << "\n";
+        }
+    }
+};
+
+int Veiculo::numVeiculos = 0; 
+Veiculo Veiculo::veiculos[MAX_VEICULOS]; 
+
+int main() {
+   Veiculo::adicionarVeiculo(1500, 2022, "Preto", "Volks");
+    Veiculo::adicionarVeiculo(1200, 2021, "Branco", "Ferrari");
+    Veiculo::adicionarVeiculo(1800, 2023, "Azul", "Fiat");
+
+    Veiculo::imprimirVeiculos();
+
+    Veiculo::imprimirArquivo("veiculos_cadastrados.txt");
+
+    return 0;
+}
