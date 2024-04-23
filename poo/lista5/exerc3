@@ -1,0 +1,90 @@
+#include <iostream>
+#include <cstring> 
+#include <algorithm> 
+
+using namespace std;
+
+struct pessoa {
+    int Matricula;
+    char Nome[30];
+    float Nota;
+};
+
+void merge(pessoa arr[], int left, int mid, int right, int escolha) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    pessoa L[n1], R[n2];
+
+    for (int i = 0; i < n1; ++i)
+        L[i] = arr[left + i];
+    for (int j = 0; j < n2; ++j)
+        R[j] = arr[mid + 1 + j];
+
+    int i = 0, j = 0, k = left;
+    while (i < n1 && j < n2) {
+        if (escolha == 1 ? L[i].Matricula >= R[j].Matricula : strcmp(L[i].Nome, R[j].Nome) >= 0) {
+            arr[k] = L[i];
+            ++i;
+        } else {
+            arr[k] = R[j];
+            ++j;
+        }
+        ++k;
+    }
+
+    while (i < n1) {
+        arr[k] = L[i];
+        ++i;
+        ++k;
+    }
+
+    while (j < n2) {
+        arr[k] = R[j];
+        ++j;
+        ++k;
+    }
+}
+
+void mergeSort(pessoa arr[], int left, int right, int escolha) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid, escolha);
+        mergeSort(arr, mid + 1, right, escolha);
+        merge(arr, left, mid, right, escolha);
+    }
+}
+
+void ordenarPorCampo(pessoa arr[], int N, int escolha) {
+    mergeSort(arr, 0, N - 1, escolha);
+}
+
+int main() {
+    int N;
+    cout << "Digite o número de pessoas: ";
+    cin >> N;
+
+    pessoa pessoas[N];
+
+    for (int i = 0; i < N; ++i) {
+        cout << "Digite a matrícula da pessoa #" << i + 1 << ": ";
+        cin >> pessoas[i].Matricula;
+        cout << "Digite o nome da pessoa #" << i + 1 << ": ";
+        cin >> pessoas[i].Nome;
+        cout << "Digite a nota da pessoa #" << i + 1 << ": ";
+        cin >> pessoas[i].Nota;
+    }
+
+    int escolha;
+    cout << "Escolha o campo pelo qual deseja ordenar (1 para Matrícula, 2 para Nome): ";
+    cin >> escolha;
+
+    ordenarPorCampo(pessoas, N, escolha);
+
+    cout << "\nPessoas ordenadas:\n";
+    for (int i = 0; i < N; ++i) {
+        cout << "Matrícula: " << pessoas[i].Matricula << ", Nome: " << pessoas[i].Nome << ", Nota: " << pessoas[i].Nota << endl;
+    }
+
+    return 0;
+}
